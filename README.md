@@ -16,6 +16,7 @@ Building the game requires a unix-like environment, GBDK, Yasm, as well as custo
 
 Clone our GBDK repository, which contains tweaks for it to build on modern systems. Build and install it somewhere. Below installs to `/home/user/gbdk/sdk`:
 
+/Note: this repository got removed/
 ```sh
 git clone git://github.com/infinity-gbc/gbdk.git
 cd gbdk
@@ -42,7 +43,7 @@ export PATH=$PATH:$GBDK_PATH/sdk/gbz80-gb/2.1.5/bin
 Clone the Infinity repository:
 
 ```sh
-git clone https://github.com/infinity-gbc/infinity.git
+git clone https://github.com/basxto/infinity.git
 cd infinity
 INFINITY=`pwd`
 ```
@@ -51,14 +52,13 @@ Build the toolchain:
 
 ```sh
 cd $INFINITY
-cd tools/toolchain
-make
-cd ../../
+make toolchain
 ```
 
 Build the game!
 
 ```sh
+cd $INFINITY
 make
 ```
 
