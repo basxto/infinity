@@ -28,15 +28,12 @@ clean:
 	$(RM) -f resource/eve/etxt.h
 	$(RM) -f resource/eve/dialog.dat
 	$(RM) -f resource/eve/game.pst resource/eve/demo.edt
-	$(RM) -f resource/ext/*.bin
-	$(RM) -f resource/ext/game.j2w
-	$(RM) -f resource/ext/zonemap.pag
+	$(MAKE) -C resource/ext/ clean
 	$(RM) -f resource/*.pag
 	$(RM) -f source/data/*.h
 	$(RM) -f build/*.o
 
 distclean: clean
-	cd tools/toolchain && make clean
 	$(MAKE) -C tools/toolchain clean
 	$(RM) -rf source/data
 	$(RM) -rf build
@@ -83,55 +80,55 @@ resource/map00.pag: resource/ext/game.j2w
 	cd resource && $(J2W) ext/game.j2w
 
 build/e.o: source/e.c
-	cd source && $(CC) -c -o ../build/e.o e.c
+	$(CC) -c -o $@ $^
 
 build/asm.o: source/asmfunc.s
-	cd source && $(CC) -c -Wa-g -o ../build/asm.o asmfunc.s
+	$(CC) -c -Wa-g -o $@ $^
 
 build/j.o: source/j.c
-	cd source && $(CC) -Wf-bo1 -c -o ../build/j.o j.c
+	$(CC) -Wf-bo1 -c -o $@ $^
 
 build/j2.o: source/j2.c
-	cd source && $(CC) -Wf-bo2 -c -o ../build/j2.o j2.c
+	$(CC) -Wf-bo2 -c -o $@ $^
 
 build/d1.o: source/d1.c source/data/dudepal.h source/data/dudepal2.h source/data/arrow_w.h source/data/cure1.h source/data/fire1.h source/data/fx1.h source/data/gemgfx.h source/data/itemgfx.h source/data/jolt1.h source/data/menugfx.h source/data/menuwing.h source/data/missgfx.h source/data/poof.h source/data/scratch1.h source/data/skillgfx.h source/data/slash1.h source/data/slurp.h source/data/spawn1.h source/data/staff1.h source/data/sword1.h source/data/tidal1.h source/data/wake.h source/data/whirl1.h source/data/wingding.h
-	cd source && $(CC) -Wf-bo3 -c -o ../build/d1.o d1.c
+	$(CC) -Wf-bo3 -c -o $@ $^
 
 build/d2.o: source/d2.c source/data/slash1.h source/data/slurp.h source/data/spawn1.h source/data/whirl1.h
-	cd source && $(CC) -Wf-bo4 -c -o ../build/d2.o d2.c
+	$(CC) -Wf-bo4 -c -o $@ $^
 
 build/m.o: source/m.c
-	cd source && $(CC) -Wf-bo5 -c -o ../build/m.o m.c
+	$(CC) -Wf-bo5 -c -o $@ $^
 
 build/m2.o: source/m2.c
-	cd source && $(CC) -Wf-bo6 -c -o ../build/m2.o m2.c
+	$(CC) -Wf-bo6 -c -o $@ $^
 
 build/b.o: source/b.c
-	cd source && $(CC) -Wf-bo7 -c -o ../build/b.o b.c
+	$(CC) -Wf-bo7 -c -o $@ $^
 
 build/b2.o: source/b2.c
-	cd source && $(CC) -Wf-bo8 -c -o ../build/b2.o b2.c
+	$(CC) -Wf-bo8 -c -o $@ $^
 
 build/b3.o: source/b3.c
-	cd source && $(CC) -Wf-bo9 -c -o ../build/b3.o b3.c
+	$(CC) -Wf-bo9 -c -o $@ $^
 
 build/b4.o: source/b4.c
-	cd source && $(CC) -Wf-bo10 -c -o ../build/b4.o b4.c
+	$(CC) -Wf-bo10 -c -o $@ $^
 
 build/b5.o: source/b5.c
-	cd source && $(CC) -Wf-bo11 -c -o ../build/b5.o b5.c
+	$(CC) -Wf-bo11 -c -o $@ $^
 
 build/b6.o: source/b6.c
-	cd source && $(CC) -Wf-bo12 -c -o ../build/b6.o b6.c
+	$(CC) -Wf-bo12 -c -o $@ $^
 
 build/dm.o: source/dfs_main.s
-	cd source && $(CC) -Wf-bo13 -c -Wa-g -o ../build/dm.o dfs_main.s
+	$(CC) -Wf-bo13 -c -Wa-g -o $@ $^
 
 build/t.o: source/title.s
-	cd source && $(CC) -Wf-bo14 -c -Wa-g -o ../build/t.o title.s
+	$(CC) -Wf-bo14 -c -Wa-g -o $@ $^
 
-build/j.gb: source/eve/itemdefs.h build/e.o build/asm.o build/j.o build/j2.o build/d1.o build/d2.o build/m.o build/m2.o build/b.o build/b2.o build/b3.o build/b4.o build/b5.o build/b6.o build/dm.o build/t.o resource/efr00.pag resource/txt00.pag resource/eve00.pag resource/map00.pag
-	cd build && $(CC) -Wl-m -Wl-yt27 -Wl-yo128 -Wl-ya4 -o j.gb e.o asm.o j.o j2.o m.o m2.o d1.o d2.o b.o b2.o b3.o b4.o b5.o b6.o dm.o t.o
+build/j.gb: build/e.o source/eve/itemdefs.h build/asm.o build/j.o build/j2.o build/d1.o build/d2.o build/m.o build/m2.o build/b.o build/b2.o build/b3.o build/b4.o build/b5.o build/b6.o build/dm.o build/t.o resource/efr00.pag resource/txt00.pag resource/eve00.pag resource/map00.pag
+	$(CC) -Wl-m -Wl-yt27 -Wl-yo128 -Wl-ya4 -o $@ $^ asm.o j.o j2.o m.o m2.o d1.o d2.o b.o b2.o b3.o b4.o b5.o b6.o dm.o t.o
 
 	cd resource && $(INSPAGE) ../build/j.gb zonemap.pag 15
 	cd resource && $(INSPAGE) ../build/j.gb efr00.pag 16

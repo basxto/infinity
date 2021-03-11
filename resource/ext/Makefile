@@ -4,6 +4,7 @@ SRCDATA=$(INFINIDIR)source/data
 GBR2BIN=$(INFINIDIR)bin/gbr2bin
 GFX2H=$(INFINIDIR)bin/gfx2h
 
+.PHONY: clean
 
 arrow_w.bin: arrow_w.gbr
 	$(GBR2BIN) arrow_w.gbr arrow_w.bin /nopal 0 15
@@ -296,3 +297,6 @@ game.j2w: infinity.in
 	$(GBR2BIN) woomagi.gbr woomagi.bin 0 7
 	rm -f game.j2w && ../$(J2W) game.j2w infinity.in
 	cp zonemap.pag resource/zonemap.pag
+
+clean:
+	$(RM) -f ./*.bin game.j2w zonemap.pag
