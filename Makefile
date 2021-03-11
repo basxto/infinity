@@ -1,4 +1,5 @@
 CC=lcc
+#-Wf--std-sdcc95
 EMU=sameboy
 ITEMCONV=../bin/itemconv
 AFZCONV=../../bin/afzconv
@@ -79,7 +80,7 @@ resource/eve00.pag: resource/eve/demo.edt
 resource/map00.pag: resource/ext/game.j2w
 	cd resource && $(J2W) ext/game.j2w
 
-build/e.o: source/e.c
+build/e.o: source/e.c source/eve/itemdefs.h
 	$(CC) -c -o $@ $^
 
 build/asm.o: source/asmfunc.s
@@ -127,7 +128,7 @@ build/dm.o: source/dfs_main.s
 build/t.o: source/title.s
 	$(CC) -Wf-bo14 -c -Wa-g -o $@ $^
 
-build/j.gb: build/e.o source/eve/itemdefs.h build/asm.o build/j.o build/j2.o build/d1.o build/d2.o build/m.o build/m2.o build/b.o build/b2.o build/b3.o build/b4.o build/b5.o build/b6.o build/dm.o build/t.o resource/efr00.pag resource/txt00.pag resource/eve00.pag resource/map00.pag
+build/j.gb: build/e.o build/asm.o build/j.o build/j2.o build/d1.o build/d2.o build/m.o build/m2.o build/b.o build/b2.o build/b3.o build/b4.o build/b5.o build/b6.o build/dm.o build/t.o resource/efr00.pag resource/txt00.pag resource/eve00.pag resource/map00.pag
 	$(CC) -Wl-m -Wl-yt27 -Wl-yo128 -Wl-ya4 -o $@ $^ asm.o j.o j2.o m.o m2.o d1.o d2.o b.o b2.o b3.o b4.o b5.o b6.o dm.o t.o
 
 	cd resource && $(INSPAGE) ../build/j.gb zonemap.pag 15

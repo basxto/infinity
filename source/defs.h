@@ -16,7 +16,7 @@
  * package.
  */
 
-#include<gb.h>
+#include<gb/gb.h>
 void memcpy(void *dest, void *src, UWORD size);
 void memset(void *dest, UBYTE c, UWORD size);
 UBYTE rom_page(UBYTE page);
@@ -325,7 +325,7 @@ BYTE inputb();
 
 void win_tiles(UBYTE x);
 
-void reset_str();
+void reset_str(UBYTE start);
 void restore_str();
 UBYTE save_str();
 UBYTE read_str();
@@ -776,6 +776,5 @@ void end_init();
 void end_next();
 void end_deinit();
 
-void f_setbosspal();
 void f_setaluthapal(UBYTE map);
 

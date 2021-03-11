@@ -18,6 +18,7 @@
 
 #include"defs.h"
 #include"d1.h"
+#include"dfs.h"
 
 extern UBYTE bspr_window;
 extern UBYTE reset_ok, _gba;
@@ -226,14 +227,6 @@ extern void render_bg_hline_asm();
 extern void render_bg_vline_asm();
 extern void asm_init();
 extern void w4vbl();
-
-extern void dfs_line();
-extern void dfs_clear();
-extern void dfs_pstr();
-extern void dfs_pchar();
-extern void dfs_strlen();
-extern void dfs_window();
-//extern void dfs_update();
 
 extern void grad_init();
 extern void grad_int();
