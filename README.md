@@ -16,7 +16,7 @@ Building the game requires a unix-like environment, GBDK, Yasm, as well as custo
 
 Clone our GBDK repository, which contains tweaks for it to build on modern systems. Build and install it somewhere. Below installs to `/home/user/gbdk/sdk`:
 
-/Note: this repository got removed/
+*Note: this repository got removed*
 ```sh
 git clone git://github.com/infinity-gbc/gbdk.git
 cd gbdk
